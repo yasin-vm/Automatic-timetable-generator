@@ -1,0 +1,51 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Class Management</title>
+</head>
+<body>
+
+<h1>Class Management</h1>
+
+<a href="{% url 'add_class' %}">+ Add New Class</a>
+
+<br><br>
+
+{% for message in messages %}
+    <p>{{ message }}</p>
+{% endfor %}
+
+<table border="1" cellpadding="12">
+
+    <tr>
+        <th>ID</th>
+        <th>Class Name</th>
+        <th>Actions</th>
+    </tr>
+
+    {% for item in classes %}
+    <tr>
+        <td>{{ item.id }}</td>
+        <td>{{ item.class_name }}</td>
+        <td>
+            <a href="{% url 'edit_class' item.id %}">Edit</a>
+
+            <a href="{% url 'delete_class' item.id %}">Delete</a>
+        </td>
+    </tr>
+
+    {% empty %}
+    <tr>
+        <td colspan="3">No classes added yet.</td>
+    </tr>
+    {% endfor %}
+
+</table>
+
+<br>
+
+<a href="{% url 'hod_dashboard' %}">Back to Dashboard</a>
+
+</body>
+</html>
