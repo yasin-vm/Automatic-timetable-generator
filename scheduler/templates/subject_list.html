@@ -1,0 +1,60 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Subject Management</title>
+</head>
+<body>
+
+<h1>Subject Management</h1>
+
+<a href="{% url 'add_subject' %}">+ Add New Subject</a>
+
+<br><br>
+
+{% for message in messages %}
+    <p>{{ message }}</p>
+{% endfor %}
+
+<table border="1" cellpadding="10">
+
+    <tr>
+        <th>Code</th>
+        <th>Subject Name</th>
+        <th>Weekly Hours</th>
+        <th>Lab</th>
+        <th>Consecutive</th>
+        <th>Class</th>
+        <th>Actions</th>
+    </tr>
+
+    {% for subject in subjects %}
+    <tr>
+        <td>{{ subject.subject_code }}</td>
+        <td>{{ subject.subject_name }}</td>
+        <td>{{ subject.weekly_hours }}</td>
+        <td>{{ subject.is_lab|yesno:"Yes,No" }}</td>
+        <td>{{ subject.requires_consecutive|yesno:"Yes,No" }}</td>
+        <td>{{ subject.class_ref }}</td>
+
+        <td>
+            <a href="{% url 'edit_subject' subject.id %}">Edit</a>
+
+            <a href="{% url 'delete_subject' subject.id %}">Delete</a>
+        </td>
+    </tr>
+
+    {% empty %}
+    <tr>
+        <td colspan="7">No subjects added yet.</td>
+    </tr>
+    {% endfor %}
+
+</table>
+
+<br>
+
+<a href="{% url 'hod_dashboard' %}">Back to Dashboard</a>
+
+</body>
+</html>
